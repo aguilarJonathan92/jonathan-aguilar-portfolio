@@ -1,0 +1,53 @@
+/* ============================================
+   TOKENS DE DISEÑO — Paleta A (Violeta + Slate)
+   ============================================ */
+
+:root {
+  /* Backgrounds */
+  --color-bg:           rgb(248, 248, 252);
+  --color-surface:      rgb(241, 239, 232);
+  --color-bg-white:     rgb(255, 255, 255);
+
+  /* Borders */
+  --color-border:       rgb(224, 223, 240);
+  --color-border-mid:   rgb(211, 209, 199);
+
+  /* Accent — Violeta */
+  --color-accent:       rgb(83, 74, 183);
+  --color-accent-light: rgb(175, 169, 236);
+  --color-accent-soft:  rgb(238, 237, 254);
+  --color-accent-dark:  rgb(38, 33, 92);
+  --color-accent-mid:   rgb(60, 52, 137);
+  --color-accent-muted: rgb(206, 203, 246);
+
+  /* Text */
+  --color-text:         rgb(44, 44, 42);
+  --color-text-heading: rgb(26, 23, 48);
+  --color-text-muted:   rgb(136, 135, 128);
+  --color-text-soft:    rgb(95, 94, 90);
+
+  /* Status */
+  --color-done-bg:      rgb(225, 245, 238);
+  --color-done-text:    rgb(15, 110, 86);
+  --color-done-border:  rgb(93, 202, 165);
+  --color-wip-bg:       rgb(250, 238, 218);
+  --color-wip-text:     rgb(99, 56, 6);
+  --color-wip-border:   rgb(239, 159, 39);
+
+  /* Footer */
+  --color-footer-bg:    rgb(26, 23, 48);
+
+  /* Typography */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  /* Spacing */
+  --section-padding: 48px 40px;
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-pill: 100px;
+}
