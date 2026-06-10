@@ -1,3 +1,96 @@
 ---
-// TODO: implementar componente Footer
+const year = new Date().getFullYear();
+
+const links = [
+  { label: "GitHub",   href: "https://github.com/usuario",   external: true },
+  { label: "LinkedIn", href: "https://linkedin.com/in/usuario", external: true },
+];
 ---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <a href="#inicio" class="footer__logo">
+      Jonathan<span>.</span>
+    </a>
+
+    <nav class="footer__links" aria-label="Links externos">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class="footer__link"
+          target={link.external ? "_blank" : undefined}
+          rel={link.external ? "noopener noreferrer" : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <p class="footer__copy">
+      Corrientes, Argentina &middot; {year}
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-footer-bg);
+    border-top: 1px solid #2A2740;
+  }
+
+  .footer__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .footer__logo {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-accent-muted);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+
+  .footer__logo span {
+    color: #7F77DD;
+  }
+
+  .footer__links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer__link {
+    font-size: 12px;
+    font-weight: 500;
+    color: #5F5E5A;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer__link:hover {
+    color: var(--color-accent-muted);
+    text-decoration: none;
+  }
+
+  .footer__copy {
+    font-size: 11px;
+    color: #5F5E5A;
+  }
+
+  @media (max-width: 600px) {
+    .footer__inner {
+      padding: 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+</style>

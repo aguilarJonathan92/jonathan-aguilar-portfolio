@@ -1,3 +1,177 @@
 ---
-// TODO: implementar componente Navbar
+const links = [
+  { label: "Inicio",       href: "#inicio" },
+  { label: "Sobre mí",     href: "#sobre-mi" },
+  { label: "Herramientas", href: "#herramientas" },
+  { label: "Proyectos",    href: "#proyectos" },
+  { label: "Formación",    href: "#formacion" },
+  { label: "Contacto",     href: "#contacto" },
+];
 ---
+ 
+<header class="navbar">
+  <div class="navbar__inner">
+    <a href="#inicio" class="navbar__logo">
+      Jonathan<span>.</span>
+    </a>
+ 
+    <!-- Desktop -->
+    <nav class="navbar__links" aria-label="Navegación principal">
+      {links.map(link => (
+        <a href={link.href} class="navbar__link">{link.label}</a>
+      ))}
+    </nav>
+ 
+    <!-- Hamburger mobile -->
+    <button class="navbar__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+ 
+  <!-- Mobile menu -->
+  <nav id="mobile-menu" class="navbar__mobile" aria-label="Menú móvil" hidden>
+    {links.map(link => (
+      <a href={link.href} class="navbar__mobile-link">{link.label}</a>
+    ))}
+  </nav>
+</header>
+ 
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    backdrop-filter: blur(8px);
+  }
+ 
+  .navbar__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+ 
+  .navbar__logo {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-heading);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+ 
+  .navbar__logo span {
+    color: var(--color-accent);
+  }
+ 
+  .navbar__links {
+    display: flex;
+    gap: 28px;
+  }
+ 
+  .navbar__link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+ 
+  .navbar__link:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+ 
+  /* Burger — oculto en desktop */
+  .navbar__burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+ 
+  .navbar__burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-text-heading);
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+ 
+  /* Mobile menu */
+  .navbar__mobile {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-border);
+    padding: 12px 40px 16px;
+    background-color: var(--color-bg);
+  }
+ 
+  .navbar__mobile[hidden] {
+    display: none;
+  }
+ 
+  .navbar__mobile-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    padding: 10px 0;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+ 
+  .navbar__mobile-link:last-child {
+    border-bottom: none;
+  }
+ 
+  .navbar__mobile-link:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+ 
+  /* Responsive */
+  @media (max-width: 768px) {
+    .navbar__links {
+      display: none;
+    }
+ 
+    .navbar__burger {
+      display: flex;
+    }
+ 
+    .navbar__inner {
+      padding: 0 20px;
+    }
+  }
+</style>
+ 
+<script>
+  const burger = document.querySelector('.navbar__burger') as HTMLButtonElement;
+  const menu   = document.getElementById('mobile-menu') as HTMLElement;
+ 
+  burger?.addEventListener('click', () => {
+    const isOpen = !menu.hidden;
+    menu.hidden = isOpen;
+    burger.setAttribute('aria-expanded', String(!isOpen));
+  });
+ 
+  // Cerrar al hacer click en un link
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.hidden = true;
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
