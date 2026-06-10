@@ -1,7 +1,107 @@
 ---
-// TODO: implementar sección skills
+import { skillGroups } from '../../data/skills';
 ---
 
-<section id="skills">
-  <!-- skills -->
+<section id="herramientas" class="skills alt">
+  <div class="skills__inner">
+    <div class="skills__header">
+      <p class="sec-label">Herramientas</p>
+      <h2 class="sec-heading">Stack técnico</h2>
+    </div>
+
+    <div class="skills__groups">
+      {skillGroups.map(group => (
+        <div class="skills__row">
+          <span class="skills__cat">{group.category}</span>
+          <div class="skills__badges">
+            {group.skills.map(skill => (
+              <span class={`badge badge--${group.variant}`}>{skill}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
 </section>
+
+<style>
+  .skills {
+    background-color: var(--color-surface);
+  }
+
+  .skills__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--section-padding);
+  }
+
+  .skills__header {
+    margin-bottom: 32px;
+  }
+
+  .skills__groups {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .skills__row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .skills__cat {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    min-width: 100px;
+    flex-shrink: 0;
+  }
+
+  .skills__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  /* Badges */
+  .badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 13px;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+  }
+
+  .badge--dark {
+    background-color: var(--color-accent-dark);
+    color: var(--color-accent-muted);
+    border-color: var(--color-accent-mid);
+  }
+
+  .badge--purple {
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent-mid);
+    border-color: var(--color-accent-light);
+  }
+
+  .badge--gray {
+    background-color: var(--color-surface);
+    color: var(--color-text-soft);
+    border-color: var(--color-border-mid);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .skills__row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .skills__cat {
+      min-width: unset;
+    }
+  }
+</style>
