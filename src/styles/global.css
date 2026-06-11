@@ -51,7 +51,7 @@ section.alt {
 /* ============================================
    UTILIDADES COMPARTIDAS DE SECCIONES
    ============================================ */
- 
+
 .sec-label {
   font-size: 11px;
   font-weight: 500;
@@ -60,7 +60,7 @@ section.alt {
   letter-spacing: 0.1em;
   margin-bottom: 6px;
 }
- 
+
 .sec-heading {
   font-family: var(--font-display);
   font-size: clamp(22px, 3vw, 28px);
@@ -68,4 +68,24 @@ section.alt {
   color: var(--color-text-heading);
   letter-spacing: -0.02em;
   margin-bottom: 0;
+}
+
+/* ============================================
+   RESPONSIVE — breakpoints globales
+   sm: 480px  |  md: 768px  |  lg: 1100px
+   ============================================ */
+
+/* Padding de sección en mobile */
+@media (max-width: 768px) {
+  section {
+    padding: var(--section-padding-mobile);
+  }
+}
+
+/* Todos los __inner mantienen padding lateral mínimo en mobile */
+@media (max-width: 768px) {
+  [class$="__inner"] {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
 }

@@ -93,7 +93,7 @@ import { skillGroups } from '../../data/skills';
   }
 
   /* Responsive */
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .skills__row {
       flex-direction: column;
       align-items: flex-start;
@@ -102,6 +102,15 @@ import { skillGroups } from '../../data/skills';
 
     .skills__cat {
       min-width: unset;
+      color: var(--color-accent);
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .badge {
+      font-size: 11px;
+      padding: 3px 11px;
     }
   }
 </style>

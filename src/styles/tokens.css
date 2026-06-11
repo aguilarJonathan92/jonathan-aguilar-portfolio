@@ -43,6 +43,7 @@
 
   /* Spacing */
   --section-padding: 48px 40px;
+  --section-padding-mobile: 36px 20px;
 
   /* Radius */
   --radius-sm:  6px;

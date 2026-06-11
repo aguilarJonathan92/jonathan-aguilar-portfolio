@@ -146,6 +146,12 @@ const contacts = [
     color: var(--color-text-heading);
   }
 
+  @media (max-width: 768px) {
+    .contact__chips {
+      gap: 10px;
+    }
+  }
+
   @media (max-width: 600px) {
     .contact__chips {
       flex-direction: column;
@@ -153,6 +159,16 @@ const contacts = [
 
     .contact-chip {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact__sub {
+      font-size: 13px;
+    }
+
+    .contact-chip__value {
+      font-size: 12px;
     }
   }
 </style>

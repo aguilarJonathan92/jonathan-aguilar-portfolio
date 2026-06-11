@@ -8,20 +8,20 @@ const links = [
   { label: "Contacto",     href: "#contacto" },
 ];
 ---
- 
+
 <header class="navbar">
   <div class="navbar__inner">
     <a href="#inicio" class="navbar__logo">
-      Jonathan<span>.</span>
+      Jonathan<span> Aguilar</span>
     </a>
- 
+
     <!-- Desktop -->
     <nav class="navbar__links" aria-label="Navegación principal">
       {links.map(link => (
         <a href={link.href} class="navbar__link">{link.label}</a>
       ))}
     </nav>
- 
+
     <!-- Hamburger mobile -->
     <button class="navbar__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
       <span></span>
@@ -29,7 +29,7 @@ const links = [
       <span></span>
     </button>
   </div>
- 
+
   <!-- Mobile menu -->
   <nav id="mobile-menu" class="navbar__mobile" aria-label="Menú móvil" hidden>
     {links.map(link => (
@@ -37,7 +37,7 @@ const links = [
     ))}
   </nav>
 </header>
- 
+
 <style>
   .navbar {
     position: sticky;
@@ -47,7 +47,7 @@ const links = [
     border-bottom: 1px solid var(--color-border);
     backdrop-filter: blur(8px);
   }
- 
+
   .navbar__inner {
     max-width: 1100px;
     margin: 0 auto;
@@ -57,7 +57,7 @@ const links = [
     align-items: center;
     justify-content: space-between;
   }
- 
+
   .navbar__logo {
     font-family: var(--font-display);
     font-size: 16px;
@@ -66,16 +66,16 @@ const links = [
     letter-spacing: -0.02em;
     text-decoration: none;
   }
- 
+
   .navbar__logo span {
     color: var(--color-accent);
   }
- 
+
   .navbar__links {
     display: flex;
     gap: 28px;
   }
- 
+
   .navbar__link {
     font-size: 13px;
     font-weight: 500;
@@ -83,12 +83,12 @@ const links = [
     text-decoration: none;
     transition: color 0.15s ease;
   }
- 
+
   .navbar__link:hover {
     color: var(--color-accent);
     text-decoration: none;
   }
- 
+
   /* Burger — oculto en desktop */
   .navbar__burger {
     display: none;
@@ -99,7 +99,7 @@ const links = [
     cursor: pointer;
     padding: 4px;
   }
- 
+
   .navbar__burger span {
     display: block;
     width: 22px;
@@ -108,7 +108,7 @@ const links = [
     border-radius: 2px;
     transition: all 0.2s ease;
   }
- 
+
   /* Mobile menu */
   .navbar__mobile {
     display: flex;
@@ -117,11 +117,11 @@ const links = [
     padding: 12px 40px 16px;
     background-color: var(--color-bg);
   }
- 
+
   .navbar__mobile[hidden] {
     display: none;
   }
- 
+
   .navbar__mobile-link {
     font-size: 14px;
     font-weight: 500;
@@ -130,42 +130,48 @@ const links = [
     text-decoration: none;
     border-bottom: 1px solid var(--color-border);
   }
- 
+
   .navbar__mobile-link:last-child {
     border-bottom: none;
   }
- 
+
   .navbar__mobile-link:hover {
     color: var(--color-accent);
     text-decoration: none;
   }
- 
+
   /* Responsive */
   @media (max-width: 768px) {
     .navbar__links {
       display: none;
     }
- 
+
     .navbar__burger {
       display: flex;
     }
- 
+
     .navbar__inner {
       padding: 0 20px;
     }
   }
+
+  @media (max-width: 480px) {
+    .navbar__mobile {
+      padding: 8px 20px 14px;
+    }
+  }
 </style>
- 
+
 <script>
   const burger = document.querySelector('.navbar__burger') as HTMLButtonElement;
   const menu   = document.getElementById('mobile-menu') as HTMLElement;
- 
+
   burger?.addEventListener('click', () => {
     const isOpen = !menu.hidden;
     menu.hidden = isOpen;
     burger.setAttribute('aria-expanded', String(!isOpen));
   });
- 
+
   // Cerrar al hacer click en un link
   menu?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
@@ -174,4 +180,3 @@ const links = [
     });
   });
 </script>
-
