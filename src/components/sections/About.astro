@@ -31,43 +31,74 @@ const meta = [
     </div>
 
     <div class="about__grid">
-      <div class="about__text">
-        <p>
-          Soy desarrollador backend con foco en Java y PHP, actualmente cursando
-          la Licenciatura en Sistemas de Información en la UNNE. Construyo
-          sistemas que resuelven problemas reales: desde APIs REST con
-          autenticación hasta aplicaciones de gestión complejas con lógica
-          de negocio.
-        </p>
-        <p>
-          Antes de dedicarme al desarrollo trabajé en seguridad privada y como
-          soldado voluntario en el Ejército Argentino. Esa experiencia me dejó
-          disciplina, tolerancia a la presión y capacidad para trabajar en equipo
-          bajo objetivos concretos.
-        </p>
-        <p>
-          Estoy construyendo un portfolio sólido para ingresar al mercado laboral,
-          con foco en el sector público y privado de la región.
-        </p>
+
+      <div class="about__content">
+        <div class="about__text">
+          <p>
+            Me llamo Jonathan, tengo 34 años y vivo en Corrientes. Elegí el
+            desarrollo de software después de años en entornos que exigen
+            disciplina real — seguridad privada y el Ejército Argentino. Esa
+            trayectoria me dejó algo que no se aprende en ningún curso: saber
+            trabajar bajo presión, cumplir lo que prometo y no largar un
+            problema hasta resolverlo.
+          </p>
+
+          <p>
+            Hoy estoy cursando Sistemas de Información en la UNNE y construyo
+            proyectos propios con Java, Spring Boot, PHP y Laravel. No busco el
+            primer trabajo para "ganar experiencia" — busco un equipo donde
+            pueda aportar desde el día uno y seguir creciendo.
+          </p>
+        </div>
+
+        <div class="about__photo-wrap">
+          <img
+            src="/images/foto-perfil.jpeg"
+            alt="Jonathan Aguilar, Backend Developer"
+            class="about__photo"
+            width="400"
+            height="400"
+            loading="lazy"
+          />
+        </div>
       </div>
 
       <div class="about__meta">
         {meta.map(item => (
           <div class="meta-card">
             <div class="meta-card__icon" aria-hidden="true">
+
               {item.icon === "map-pin" && (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
               )}
+
               {item.icon === "school" && (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
               )}
+
               {item.icon === "code" && (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"/>
+                  <polyline points="8 6 2 12 8 18"/>
+                </svg>
               )}
+
               {item.icon === "language" && (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
               )}
+
             </div>
+
             <div class="meta-card__info">
               <p class="meta-card__label">{item.label}</p>
               <p class="meta-card__value">{item.value}</p>
@@ -75,114 +106,129 @@ const meta = [
           </div>
         ))}
       </div>
+
+    </div>
+
     </div>
   </div>
 </section>
 
 <style>
-  .about {
-    background-color: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .about__inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: var(--section-padding);
-  }
-
-  .about__header {
-    margin-bottom: 32px;
-  }
-
   .about__grid {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 48px;
-    align-items: start;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
 
-  /* Texto */
-  .about__text {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+.about__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--section-padding);
+}
 
-  .about__text p {
-    font-size: 15px;
-    color: var(--color-text-soft);
-    line-height: 1.75;
-  }
+/* Texto + foto */
+.about__content {
+  display: grid;
+  grid-template-columns: 1.6fr 320px;
+  gap: 32px;
 
-  /* Meta cards */
-  .about__meta {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  align-items: center;
 
-  .meta-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    transition: border-color 0.15s ease;
-  }
+  max-width: 1000px;
+  margin: 0 auto;
+}
 
-  .meta-card:hover {
-    border-color: var(--color-accent-light);
-  }
+/* Texto */
+.about__text {
+  max-width: 700px;
+}
 
-  .meta-card__icon {
-    color: var(--color-accent);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background-color: var(--color-accent-soft);
-    border-radius: var(--radius-sm);
-  }
+.about__text p {
+  font-size: 15px;
+  line-height: 1.9;
+  text-align: justify;
+  color: var(--color-text-soft);
+}
 
-  .meta-card__label {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 2px;
-  }
+/* Foto */
+.about__photo-wrap {
+  width: 100%;
+  max-width: 320px;
 
-  .meta-card__value {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--color-text-heading);
-  }
+  margin: 0 auto; /* en vez de margin-left:auto */
+}
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .about__grid {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
+.about__photo {
+  width: 100%;
+  height: 100%;
+  display: block;
 
-    .about__text p {
-      font-size: 14px;
-    }
-  }
+  object-fit: cover;
+  object-position: center top;
+}
 
-  @media (max-width: 480px) {
-    .meta-card {
-      padding: 10px 14px;
-    }
+.about__photo-wrap:hover {
+  border-color: var(--color-accent-light);
+}
 
-    .meta-card__value {
-      font-size: 12px;
-    }
-  }
+/* Cards */
+.about__meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.meta-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 14px;
+
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+
+  transition: border-color .15s ease;
+}
+
+.meta-card:hover {
+  border-color: var(--color-accent-light);
+}
+
+.meta-card__icon {
+  color: var(--color-accent);
+
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: var(--radius-sm);
+
+  background-color: var(--color-accent-soft);
+}
+
+.meta-card__label {
+  font-size: 10px;
+  font-weight: 500;
+
+  color: var(--color-text-muted);
+
+  text-transform: uppercase;
+  letter-spacing: .05em;
+
+  margin-bottom: 2px;
+}
+
+.meta-card__value {
+  font-size: 12.5px;
+  font-weight: 500;
+
+  color: var(--color-text-heading);
+}
 </style>
