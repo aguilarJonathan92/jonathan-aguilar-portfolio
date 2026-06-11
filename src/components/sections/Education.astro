@@ -1,7 +1,146 @@
 ---
-// TODO: implementar sección education
+const education = [
+  {
+    title: "Licenciatura en Sistemas de Información",
+    institution: "UNNE · Corrientes",
+    period: "En curso",
+    description: "Algoritmos, POO, Paradigmas de programación, Bases de datos, Análisis de sistemas. Lenguajes: C, Java, PHP, Lisp.",
+    accent: true,
+  },
+  {
+    title: "Formación autodidacta",
+    institution: "Proyectos propios y universitarios",
+    period: "En curso",
+    description: "Spring Boot, Laravel, React, Tailwind CSS v4, Flyway, JWT, iText 8, Filament 5. Aplicado en proyectos reales con ciclos de desarrollo completos.",
+    accent: false,
+  },
+];
 ---
 
-<section id="education">
-  <!-- education -->
+<section id="formacion" class="education">
+  <div class="education__inner">
+    <div class="education__header">
+      <p class="sec-label">Formación</p>
+      <h2 class="sec-heading">Educación</h2>
+    </div>
+
+    <div class="education__list">
+      {education.map(item => (
+        <div class="edu-card">
+          <div class:list={['edu-card__dot', { 'edu-card__dot--muted': !item.accent }]}></div>
+          <div class="edu-card__body">
+            <div class="edu-card__top">
+              <h3 class="edu-card__title">{item.title}</h3>
+              <span class="edu-card__period">{item.period}</span>
+            </div>
+            <p class="edu-card__institution">{item.institution}</p>
+            <p class="edu-card__desc">{item.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
 </section>
+
+<style>
+  .education {
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .education__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--section-padding);
+  }
+
+  .education__header {
+    margin-bottom: 32px;
+  }
+
+  .education__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .edu-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+    transition: border-color 0.15s ease;
+  }
+
+  .edu-card:hover {
+    border-color: var(--color-accent-light);
+  }
+
+  .edu-card__dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .edu-card__dot--muted {
+    background-color: var(--color-accent-light);
+  }
+
+  .edu-card__body {
+    flex: 1;
+  }
+
+  .edu-card__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .edu-card__title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-heading);
+    letter-spacing: -0.01em;
+  }
+
+  .edu-card__period {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-accent);
+    background-color: var(--color-accent-soft);
+    border: 1px solid var(--color-accent-light);
+    padding: 2px 9px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .edu-card__institution {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+  }
+
+  .edu-card__desc {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .edu-card__top {
+      flex-direction: column;
+      gap: 6px;
+    }
+  }
+</style>

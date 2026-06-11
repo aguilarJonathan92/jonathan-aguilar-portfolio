@@ -1,7 +1,174 @@
 ---
-// TODO: implementar sección about
+const meta = [
+  {
+    icon: "map-pin",
+    label: "Ubicación",
+    value: "Corrientes Capital, Argentina",
+  },
+  {
+    icon: "school",
+    label: "Formación",
+    value: "Lic. Sistemas de Información · UNNE",
+  },
+  {
+    icon: "code",
+    label: "Stack principal",
+    value: "Java · Spring Boot · PHP · Laravel",
+  },
+  {
+    icon: "language",
+    label: "Idiomas",
+    value: "Español nativo · Inglés técnico",
+  },
+];
 ---
 
-<section id="about">
-  <!-- about -->
+<section id="sobre-mi" class="about">
+  <div class="about__inner">
+    <div class="about__header">
+      <p class="sec-label">Sobre mí</p>
+      <h2 class="sec-heading">Quién soy</h2>
+    </div>
+
+    <div class="about__grid">
+      <div class="about__text">
+        <p>
+          Soy desarrollador backend con foco en Java y PHP, actualmente cursando
+          la Licenciatura en Sistemas de Información en la UNNE. Construyo
+          sistemas que resuelven problemas reales: desde APIs REST con
+          autenticación hasta aplicaciones de gestión complejas con lógica
+          de negocio.
+        </p>
+        <p>
+          Antes de dedicarme al desarrollo trabajé en seguridad privada y como
+          soldado voluntario en el Ejército Argentino. Esa experiencia me dejó
+          disciplina, tolerancia a la presión y capacidad para trabajar en equipo
+          bajo objetivos concretos.
+        </p>
+        <p>
+          Estoy construyendo un portfolio sólido para ingresar al mercado laboral,
+          con foco en el sector público y privado de la región.
+        </p>
+      </div>
+
+      <div class="about__meta">
+        {meta.map(item => (
+          <div class="meta-card">
+            <div class="meta-card__icon" aria-hidden="true">
+              {item.icon === "map-pin" && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              )}
+              {item.icon === "school" && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              )}
+              {item.icon === "code" && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              )}
+              {item.icon === "language" && (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              )}
+            </div>
+            <div class="meta-card__info">
+              <p class="meta-card__label">{item.label}</p>
+              <p class="meta-card__value">{item.value}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
 </section>
+
+<style>
+  .about {
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--section-padding);
+  }
+
+  .about__header {
+    margin-bottom: 32px;
+  }
+
+  .about__grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* Texto */
+  .about__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about__text p {
+    font-size: 15px;
+    color: var(--color-text-soft);
+    line-height: 1.75;
+  }
+
+  /* Meta cards */
+  .about__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .meta-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.15s ease;
+  }
+
+  .meta-card:hover {
+    border-color: var(--color-accent-light);
+  }
+
+  .meta-card__icon {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: var(--color-accent-soft);
+    border-radius: var(--radius-sm);
+  }
+
+  .meta-card__label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  .meta-card__value {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-heading);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+  }
+</style>

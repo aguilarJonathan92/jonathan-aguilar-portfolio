@@ -1,3 +1,233 @@
 ---
-// TODO: implementar componente ProjectCard
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+  featured?: boolean;
+}
+
+const { project, featured = false } = Astro.props;
 ---
+
+<article class:list={['pcard', { 'pcard--featured': featured }]}>
+  <div class="pcard__accent" aria-hidden="true"></div>
+
+  <header class="pcard__header">
+    <div class="pcard__titles">
+      {featured && <span class="pcard__feat-tag">Destacado</span>}
+      <h3 class="pcard__title">{project.title}</h3>
+      <p class="pcard__subtitle">{project.subtitle}</p>
+    </div>
+    <span class:list={['pcard__status', {
+      'pcard__status--done': project.status === 'completado',
+      'pcard__status--wip':  project.status === 'en-curso',
+    }]}>
+      {project.status === 'completado' ? 'Completado' : 'En curso'}
+    </span>
+  </header>
+
+  <p class="pcard__desc">{project.description}</p>
+
+  <div class="pcard__challenge">
+    <p class="pcard__challenge-label">Desafío técnico</p>
+    <p class="pcard__challenge-text">{project.challenge}</p>
+  </div>
+
+  <div class="pcard__stack">
+    {project.stack.map(tech => (
+      <span class="pcard__tech">{tech}</span>
+    ))}
+  </div>
+
+  <footer class="pcard__footer">
+    <a
+      href={project.github}
+      class="pcard__link"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Ver ${project.title} en GitHub`}
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      GitHub
+    </a>
+    {project.demo && (
+      <a
+        href={project.demo}
+        class="pcard__link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Ver demo de ${project.title}`}
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Demo
+      </a>
+    )}
+  </footer>
+</article>
+
+<style>
+  .pcard {
+    background-color: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .pcard:hover {
+    box-shadow: 0 4px 24px rgba(83, 74, 183, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .pcard--featured {
+    border: 2px solid var(--color-accent);
+  }
+
+  /* Detalle decorativo esquina superior derecha */
+  .pcard__accent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 72px;
+    height: 72px;
+    background-color: var(--color-accent-soft);
+    border-radius: 0 var(--radius-lg) 0 72px;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  /* Header */
+  .pcard__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    position: relative;
+  }
+
+  .pcard__feat-tag {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--color-accent-mid);
+    background-color: var(--color-accent-soft);
+    border: 1px solid var(--color-accent-light);
+    padding: 2px 9px;
+    border-radius: var(--radius-pill);
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  .pcard__title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-text-heading);
+    letter-spacing: -0.01em;
+    margin-bottom: 3px;
+  }
+
+  .pcard__subtitle {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
+  .pcard__status {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pcard__status--done {
+    background-color: var(--color-done-bg);
+    color: var(--color-done-text);
+    border: 1px solid var(--color-done-border);
+  }
+
+  .pcard__status--wip {
+    background-color: var(--color-wip-bg);
+    color: var(--color-wip-text);
+    border: 1px solid var(--color-wip-border);
+  }
+
+  /* Descripción */
+  .pcard__desc {
+    font-size: 13px;
+    color: var(--color-text-soft);
+    line-height: 1.65;
+  }
+
+  /* Desafío técnico */
+  .pcard__challenge {
+    background-color: #F4F3FD;
+    border-left: 2.5px solid var(--color-accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 9px 13px;
+  }
+
+  .pcard__challenge-label {
+    font-size: 9.5px;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 4px;
+  }
+
+  .pcard__challenge-text {
+    font-size: 12px;
+    color: var(--color-accent-dark);
+    line-height: 1.55;
+  }
+
+  /* Stack */
+  .pcard__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .pcard__tech {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent-mid);
+    border: 1px solid var(--color-accent-light);
+  }
+
+  /* Footer */
+  .pcard__footer {
+    display: flex;
+    gap: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+    margin-top: auto;
+  }
+
+  .pcard__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .pcard__link:hover {
+    opacity: 0.75;
+    text-decoration: none;
+  }
+</style>
