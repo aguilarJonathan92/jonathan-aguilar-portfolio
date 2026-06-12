@@ -30,7 +30,8 @@ const contacts = [
 
     <div class="contact__layout">
       <form
-        action="https://formspree.io/f/TU_ID_DE_FORMSPREE"
+        id="portfolio-form"
+        action="https://formspree.io/f/mqeoyjro"
         method="POST"
         class="contact__form"
       >
@@ -69,7 +70,8 @@ const contacts = [
             placeholder="¿En qué puedo ayudarte?"></textarea>
         </div>
 
-        <button type="submit" class="form-btn">Enviar Mensaje</button>
+        <button type="submit" class="form-btn" id="form-submit-btn">Enviar Mensaje</button>
+        <div id="form-status" class="form-status" hidden></div>
       </form>
 
       <div class="contact__sidebar">
@@ -129,26 +131,68 @@ const contacts = [
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const user = "tucorreo";
-    const domain = "email.com";
-    const fullEmail = `${user}@${domain}`;
+  // 1. Lógica anti-spam del correo (directa, sin DOMContentLoaded)
+  const user = "tucorreo"; 
+  const domain = "email.com";
+  const fullEmail = `${user}@${domain}`;
+  
+  const container = document.getElementById('secure-mail-card');
+  if (container) {
+    container.innerHTML = `
+      <a href="mailto:${fullEmail}" class="contact-chip" aria-label="Email: Enviar un correo">
+        <span class="contact-chip__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </span>
+        <span class="contact-chip__body">
+          <span class="contact-chip__label">Email</span>
+          <span class="contact-chip__value">${fullEmail}</span>
+        </span>
+      </a>
+    `;
+  }
 
-    const container = document.getElementById("secure-mail-card");
-    if (container) {
-      container.innerHTML = `
-        <a href="mailto:${fullEmail}" class="contact-chip" aria-label="Email: Enviar un correo">
-          <span class="contact-chip__icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </span>
-          <span class="contact-chip__body">
-            <span class="contact-chip__label">Email</span>
-            <span class="contact-chip__value">${fullEmail}</span>
-          </span>
-        </a>
-      `;
-    }
-  });
+  // 2. Lógica del Formulario (directa)
+  const form = document.getElementById('portfolio-form') as HTMLFormElement;
+  const status = document.getElementById('form-status') as HTMLDivElement;
+  const btn = document.getElementById('form-submit-btn') as HTMLButtonElement;
+
+  if (form && status && btn) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault(); // <-- Esto ES lo que frena la redirección
+      
+      btn.disabled = true;
+      btn.innerText = "Enviando...";
+
+      const data = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: data,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          status.className = "form-status form-status--success";
+          status.innerText = "¡Gracias! Tu mensaje ha sido enviado con éxito.";
+          status.hidden = false;
+          form.reset();
+        } else {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Ocurrió un error al enviar.");
+        }
+      } catch (error) {
+        status.className = "form-status form-status--error";
+        status.innerText = "Ups! Hubo un problema al enviar. Intentalo de nuevo.";
+        status.hidden = false;
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Enviar Mensaje";
+      }
+    });
+  }
 </script>
 
 <style>
@@ -281,6 +325,35 @@ const contacts = [
     max-width: 340px;
     margin: 0 auto;
     width: 100%;
+  }
+
+  /* Estilos para el mensaje de estado */
+  .form-status {
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: var(--radius-md, 6px);
+    text-align: center;
+    margin-top: 10px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .form-status--success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+
+  .form-status--error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  /* Animación suave para la aparición del cartel */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* Los estilos globales del contact-chip se inyectan acá para el script dinámico */
