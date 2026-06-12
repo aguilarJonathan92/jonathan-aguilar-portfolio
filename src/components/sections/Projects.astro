@@ -1,9 +1,9 @@
 ---
-import { projects } from '../../data/projects';
-import ProjectCard from '../ui/ProjectCard.astro';
+import { projects } from "../../data/projects";
+import ProjectCard from "../ui/ProjectCard.astro";
 
-const featured  = projects.filter(p => p.featured);
-const secondary = projects.filter(p => !p.featured);
+const featured = projects.filter((p) => p.featured);
+const secondary = projects.filter((p) => !p.featured);
 ---
 
 <section id="proyectos" class="projects alt">
@@ -16,24 +16,41 @@ const secondary = projects.filter(p => !p.featured);
     <div class="projects__grid">
       <!-- Proyecto destacado: columna izquierda completa -->
       <div class="projects__featured">
-        {featured.map(p => (
-          <ProjectCard project={p} featured={true} />
-        ))}
+        {featured.map((p) => <ProjectCard project={p} featured={true} />)}
       </div>
 
       <!-- Proyectos secundarios: columna derecha apilada -->
       <div class="projects__secondary">
-        {secondary.map(p => (
-          <ProjectCard project={p} />
-        ))}
+        {secondary.map((p) => <ProjectCard project={p} />)}
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  .sec-label {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+  }
+
+  .sec-heading {
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--color-text-heading);
+    letter-spacing: -0.02em;
+  }
+
   .projects {
+    min-height: calc(100vh - 56px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--color-surface);
+    padding: 40px 0;
+    box-sizing: border-box;
     border-bottom: 1px solid var(--color-border);
   }
 
@@ -41,6 +58,9 @@ const secondary = projects.filter(p => !p.featured);
     max-width: 1100px;
     margin: 0 auto;
     padding: var(--section-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .projects__header {
@@ -49,8 +69,8 @@ const secondary = projects.filter(p => !p.featured);
 
   .projects__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
     align-items: start;
   }
 

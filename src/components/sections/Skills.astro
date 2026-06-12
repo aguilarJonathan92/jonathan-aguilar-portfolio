@@ -1,116 +1,182 @@
 ---
-import { skillGroups } from '../../data/skills';
+import { skillGroups } from "../../data/skills";
 ---
 
-<section id="herramientas" class="skills alt">
+<section id="herramientas" class="skills">
   <div class="skills__inner">
     <div class="skills__header">
       <p class="sec-label">Herramientas</p>
-      <h2 class="sec-heading">Stack técnico</h2>
+      <h2 class="sec-heading">Stack Técnico Backend</h2>
     </div>
 
     <div class="skills__groups">
-      {skillGroups.map(group => (
-        <div class="skills__row">
-          <span class="skills__cat">{group.category}</span>
-          <div class="skills__badges">
-            {group.skills.map(skill => (
-              <span class={`badge badge--${group.variant}`}>{skill}</span>
-            ))}
+      {
+        skillGroups.map((group) => (
+          <div class="skills__category-block">
+            <h3 class="skills__cat-title">{group.category}</h3>
+            <div class="skills__grid">
+              {group.skills.map((skill) => (
+                <div class={`skill-card skill-card--${group.variant}`}>
+                  <div class="skill-card__icon-wrap">
+                    <img
+                      src={skill.icon}
+                      alt={`Logo de ${skill.name}`}
+                      class="skill-card__icon"
+                      loading="lazy"
+                    />
+                  </div>
+                  <span class="skill-card__name">{skill.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
+  .sec-label {
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+  }
+  /* Fuerza a la sección a tomar el 100% de la pantalla y centrar el contenido */
   .skills {
-    background-color: var(--color-surface);
+    min-height: calc(100vh - 56px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(
+      --color-bg
+    ); /* Respetamos tu color de fondo original */
+    padding: 60px 0;
+    box-sizing: border-box;
   }
 
   .skills__inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: var(--section-padding);
+    padding: 0 40px;
+    width: 100%;
   }
 
   .skills__header {
-    margin-bottom: 32px;
+    margin-bottom: 48px;
   }
 
   .skills__groups {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 40px; /* Espacio generoso entre categorías */
   }
 
-  .skills__row {
+  .skills__category-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .skills__cat-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 auto;
+  }
+
+  /* Grilla de tarjetas con logos */
+  .skills__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 140px);
+    gap: 16px;
+    justify-content: center;
+  }
+
+  /* Estilo de las nuevas Tarjetas de Habilidades */
+  .skill-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px 16px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+  }
+
+  .skill-card__icon-wrap {
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: center;
+    margin-bottom: 4px;
   }
 
-  .skills__cat {
-    font-size: 12px;
+  .skill-card__icon {
+    width: 100%;
+    height: 100%;
+    max-width: 44px;
+    max-height: 44px;
+    object-fit: contain;
+  }
+
+  .skill-card__name {
+    font-size: 14px;
     font-weight: 500;
-    color: var(--color-text-muted);
-    min-width: 100px;
-    flex-shrink: 0;
+    color: var(--color-text-heading);
+    text-align: center;
   }
 
-  .skills__badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
-
-  /* Badges */
-  .badge {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 4px 13px;
-    border-radius: var(--radius-pill);
-    border: 1px solid transparent;
-  }
-
-  .badge--dark {
-    background-color: var(--color-accent-dark);
-    color: var(--color-accent-muted);
-    border-color: var(--color-accent-mid);
-  }
-
-  .badge--purple {
-    background-color: var(--color-accent-soft);
-    color: var(--color-accent-mid);
-    border-color: var(--color-accent-light);
-  }
-
-  .badge--gray {
-    background-color: var(--color-surface);
-    color: var(--color-text-soft);
-    border-color: var(--color-border-mid);
+  /* Variantes sutiles por si querés mantener consistencia de color en los bordes al hacer hover */
+  .skill-card--purple:hover {
+    border-color: #4f46e5; /* El violeta más oscuro que elegimos antes */
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .skills__row {
-      flex-direction: column;
-      align-items: flex-start;
+    .skills__inner {
+      padding: 0 20px;
+    }
+
+    .skills__grid {
+      grid-template-columns: repeat(auto-fit, 110px);
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .skill-card {
+      padding: 16px 12px;
       gap: 8px;
     }
 
-    .skills__cat {
-      min-width: unset;
-      color: var(--color-accent);
-      font-size: 11px;
+    .skill-card__icon-wrap {
+      width: 36px;
+      height: 36px;
     }
-  }
 
-  @media (max-width: 480px) {
-    .badge {
-      font-size: 11px;
-      padding: 3px 11px;
+    .skill-card__icon {
+      max-width: 32px;
+      max-height: 32px;
+    }
+
+    .skill-card__name {
+      font-size: 12.5px;
     }
   }
 </style>

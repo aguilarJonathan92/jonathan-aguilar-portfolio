@@ -1,28 +1,40 @@
+export interface Skill {
+  name: string;
+  icon: string;
+}
+
 export interface SkillGroup {
   category: string;
   variant: 'dark' | 'purple' | 'gray';
-  skills: string[];
+  skills: Skill[]; // <-- Cambiado de string[] a Skill[]
 }
 
 export const skillGroups: SkillGroup[] = [
   {
-    category: "Backend",
-    variant: "dark",
-    skills: ["Java", "Spring Boot", "PHP", "Laravel", "Filament"],
-  },
-  {
-    category: "Frontend",
+    category: "Lenguajes y Frameworks",
     variant: "purple",
-    skills: ["React", "Tailwind CSS", "Bootstrap", "Blade"],
+    skills: [
+      { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
+      { name: "PHP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+      { name: "Laravel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" }
+    ]
   },
   {
-    category: "Bases de datos",
-    variant: "gray",
-    skills: ["MySQL", "MariaDB"],
+    category: "Bases de Datos y Persistencia",
+    variant: "dark",
+    skills: [
+      { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+      /* Tip rápido: Te cambié la URL de Hibernate por una válida de Devicon */
+      { name: "Hibernate / JPA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" }
+    ]
   },
   {
-    category: "Herramientas",
+    category: "Herramientas de Entorno",
     variant: "gray",
-    skills: ["Git", "Flyway", "IntelliJ IDEA", "Herd"],
-  },
+    skills: [
+      { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+      { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" }
+    ]
+  }
 ];

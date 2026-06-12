@@ -2,16 +2,16 @@
 const education = [
   {
     title: "Licenciatura en Sistemas de Información",
-    institution: "UNNE · Corrientes",
+    institution: "Universidad Nacional del Nordeste (UNNE) · Corrientes",
     period: "En curso",
-    description: "Algoritmos, POO, Paradigmas de programación, Bases de datos, Análisis de sistemas. Lenguajes: C, Java, PHP, Lisp.",
+    description: "Formación académica orientada al diseño y arquitectura de software. Enfoque en algoritmos, Estructuras de Datos, Paradigmas de Programación (POO, Funcional), Análisis de Sistemas y modelado de Bases de Datos relacionales.",
     accent: true,
   },
   {
-    title: "Formación autodidacta",
-    institution: "Proyectos propios y universitarios",
+    title: "Formación Autodidacta Avanzada",
+    institution: "Desarrollo basado en proyectos reales",
     period: "En curso",
-    description: "Spring Boot, Laravel, React, Tailwind CSS v4, Flyway, JWT, iText 8, Filament 5. Aplicado en proyectos reales con ciclos de desarrollo completos.",
+    description: "Especialización práctica en entornos backend profesionales. Actualmente aplicando Spring Boot y Laravel en el desarrollo de la 'Bitácora Armónica Digital' y el sistema de gestión de inventario para 'Cristal Librería', entregado de manera funcional a un cliente real.",
     accent: false,
   },
 ];
@@ -21,7 +21,7 @@ const education = [
   <div class="education__inner">
     <div class="education__header">
       <p class="sec-label">Formación</p>
-      <h2 class="sec-heading">Educación</h2>
+      <h2 class="sec-heading">Educación y Trayectoria</h2>
     </div>
 
     <div class="education__list">
@@ -43,53 +43,85 @@ const education = [
 </section>
 
 <style>
+  /* Modificado para ocupar el 100% de la pantalla y centrar verticalmente */
   .education {
+    min-height: calc(100vh - 56px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
+    padding: 40px 0;
+    box-sizing: border-box;
   }
 
   .education__inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: var(--section-padding);
+    padding: 0 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .education__header {
     margin-bottom: 32px;
   }
 
+  /* Subido el tamaño e igualado con el Sobre mí */
+  .sec-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+    margin-bottom: 10px;
+  }
+
+  .sec-heading {
+    font-size: clamp(28px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--color-text-heading);
+    letter-spacing: -0.02em;
+  }
+
   .education__list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 24px; /* Un poco más de aire entre tarjetas */
+    position: relative;
   }
 
   .edu-card {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     align-items: flex-start;
     background-color: var(--color-bg-white);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: 20px 22px;
-    transition: border-color 0.15s ease;
+    padding: 24px 28px; /* Más espaciado interno */
+    transition: border-color 0.15s ease, transform 0.15s ease;
   }
 
   .edu-card:hover {
-    border-color: var(--color-accent-light);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
   }
 
   .edu-card__dot {
-    width: 11px;
-    height: 11px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background-color: var(--color-accent);
     flex-shrink: 0;
-    margin-top: 5px;
+    margin-top: 6px;
+    box-shadow: 0 0 0 4px var(--color-accent-soft, rgba(127, 119, 221, 0.15));
   }
 
   .edu-card__dot--muted {
     background-color: var(--color-accent-light);
+    box-shadow: none;
   }
 
   .edu-card__body {
@@ -98,15 +130,15 @@ const education = [
 
   .edu-card__top {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .edu-card__title {
     font-family: var(--font-display);
-    font-size: 15px;
+    font-size: 17px; /* Subido de 15px para mayor legibilidad */
     font-weight: 600;
     color: var(--color-text-heading);
     letter-spacing: -0.01em;
@@ -114,54 +146,5 @@ const education = [
 
   .edu-card__period {
     font-size: 11px;
-    font-weight: 500;
-    color: var(--color-accent);
-    background-color: var(--color-accent-soft);
-    border: 1px solid var(--color-accent-light);
-    padding: 2px 9px;
-    border-radius: var(--radius-pill);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .edu-card__institution {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--color-accent);
-    margin-bottom: 8px;
-  }
-
-  .edu-card__desc {
-    font-size: 13px;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-  }
-
-  @media (max-width: 768px) {
-    .edu-card {
-      padding: 16px 18px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .edu-card__top {
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .edu-card__title {
-      font-size: 14px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .edu-card {
-      gap: 12px;
-      padding: 14px 16px;
-    }
-
-    .edu-card__desc {
-      font-size: 12px;
-    }
-  }
-</style>
+    font-weight: 600;
+    color: var(--color-accent-mid, var(--color-accent));

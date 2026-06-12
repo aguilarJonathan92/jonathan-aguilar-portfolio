@@ -1,11 +1,11 @@
 ---
 const links = [
-  { label: "Inicio",       href: "#inicio" },
-  { label: "Sobre mí",     href: "#sobre-mi" },
+  { label: "Inicio", href: "#inicio" },
+  { label: "Sobre mí", href: "#sobre-mi" },
   { label: "Herramientas", href: "#herramientas" },
-  { label: "Proyectos",    href: "#proyectos" },
-  { label: "Formación",    href: "#formacion" },
-  { label: "Contacto",     href: "#contacto" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Formación", href: "#formacion" },
+  { label: "Contacto", href: "#contacto" },
 ];
 ---
 
@@ -17,13 +17,22 @@ const links = [
 
     <!-- Desktop -->
     <nav class="navbar__links" aria-label="Navegación principal">
-      {links.map(link => (
-        <a href={link.href} class="navbar__link">{link.label}</a>
-      ))}
+      {
+        links.map((link) => (
+          <a href={link.href} class="navbar__link">
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <!-- Hamburger mobile -->
-    <button class="navbar__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <button
+      class="navbar__burger"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
       <span></span>
       <span></span>
       <span></span>
@@ -32,9 +41,13 @@ const links = [
 
   <!-- Mobile menu -->
   <nav id="mobile-menu" class="navbar__mobile" aria-label="Menú móvil" hidden>
-    {links.map(link => (
-      <a href={link.href} class="navbar__mobile-link">{link.label}</a>
-    ))}
+    {
+      links.map((link) => (
+        <a href={link.href} class="navbar__mobile-link">
+          {link.label}
+        </a>
+      ))
+    }
   </nav>
 </header>
 
@@ -60,7 +73,7 @@ const links = [
 
   .navbar__logo {
     font-family: var(--font-display);
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
     color: var(--color-text-heading);
     letter-spacing: -0.02em;
@@ -77,7 +90,7 @@ const links = [
   }
 
   .navbar__link {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--color-text-muted);
     text-decoration: none;
@@ -107,6 +120,25 @@ const links = [
     background-color: var(--color-text-heading);
     border-radius: 2px;
     transition: all 0.2s ease;
+  }
+
+  /* Estilo cuando el usuario está parado en esta sección */
+  .navbar__link--active {
+    color: var(--color-accent);
+    font-weight: 600; /* Le damos un poquito más de grosor para que resalte */
+    position: relative;
+  }
+
+  /* Opcional: Una rayita sutil violeta abajo del link activo (estilo muy moderno) */
+  .navbar__link--active::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-accent);
+    border-radius: 2px;
   }
 
   /* Mobile menu */
@@ -163,20 +195,55 @@ const links = [
 </style>
 
 <script>
-  const burger = document.querySelector('.navbar__burger') as HTMLButtonElement;
-  const menu   = document.getElementById('mobile-menu') as HTMLElement;
+  // --- Tu lógica anterior del menú mobile ---
+  const burger = document.querySelector(".navbar__burger") as HTMLButtonElement;
+  const menu = document.getElementById("mobile-menu") as HTMLElement;
 
-  burger?.addEventListener('click', () => {
+  burger?.addEventListener("click", () => {
     const isOpen = !menu.hidden;
     menu.hidden = isOpen;
-    burger.setAttribute('aria-expanded', String(!isOpen));
+    burger.setAttribute("aria-expanded", String(!isOpen));
   });
 
-  // Cerrar al hacer click en un link
-  menu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
       menu.hidden = true;
-      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute("aria-expanded", "false");
     });
   });
+
+  // --- NUEVA LÓGICA: Scroll Spy con IntersectionObserver ---
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".navbar__link");
+
+  const callback = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+
+        // Removemos la clase activa de todos los links
+        navLinks.forEach((link) =>
+          link.classList.remove("navbar__link--active"),
+        );
+
+        // Se la agregamos solo al link que coincida con el ID de la sección visible
+        const activeLink = document.querySelector(
+          `.navbar__link[href="#${id}"]`,
+        );
+        if (activeLink) {
+          activeLink.classList.add("navbar__link--active");
+        }
+      }
+    });
+  };
+
+  // Configuramos el observador
+  const observer = new IntersectionObserver(callback, {
+    // rootMargin define una "línea de detección".
+    // -20% desde arriba y -60% desde abajo asegura que detecte la sección que está en el centro de la pantalla
+    rootMargin: "-20% 0px -60% 0px",
+  });
+
+  // Ponemos a observar cada una de tus secciones
+  sections.forEach((section) => observer.observe(section));
 </script>

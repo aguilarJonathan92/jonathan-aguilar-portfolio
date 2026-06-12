@@ -1,7 +1,9 @@
 @import './tokens.css';
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap');
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -9,6 +11,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 56px;
 }
 
 body {
@@ -19,7 +22,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-display);
   color: var(--color-text-heading);
   letter-spacing: -0.02em;

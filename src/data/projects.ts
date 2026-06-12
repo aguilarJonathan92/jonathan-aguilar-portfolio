@@ -17,10 +17,10 @@ export const projects: Project[] = [
     description: "Sistema integral para una escuela de música. Alumnos, docentes, asistencia, calificaciones ponderadas y portal público estudiantil por DNI.",
     challenge: "JWT con JJWT 0.12.x, migraciones Flyway en entorno productivo y reportes PDF dinámicos con iText 8.",
     stack: ["Spring Boot 3.5", "React 19", "Tailwind v4", "MySQL", "Flyway", "JWT", "iText 8"],
-    status: "completado",
+    status: "en-curso",
     featured: true,
     github: "https://github.com/usuario/gestion-academica",
-    demo: "",
+    demo: "#",
   },
   {
     title: "Soundwave Store",
@@ -28,9 +28,10 @@ export const projects: Project[] = [
     description: "Tienda online con panel Filament, carrito híbrido sesión/DB y checkout con validaciones condicionales.",
     challenge: "Carrito híbrido sesión/DB con sincronización al login, paginación con preservación de filtros.",
     stack: ["Laravel 13", "Filament", "Blade", "Bootstrap 5", "MySQL"],
-    status: "completado",
+    status: "en-curso",
     featured: false,
     github: "https://github.com/usuario/soundwave-store",
+    demo: "#",
   },
   {
     title: "Cristal Librería",
@@ -41,5 +42,6 @@ export const projects: Project[] = [
     status: "en-curso",
     featured: false,
     github: "https://github.com/usuario/cristal-libreria",
+    demo: "#",
   },
 ];
